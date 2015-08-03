@@ -8,3 +8,4 @@ A little edit just for fun
 An other edit, but locally. Feeling excited ! 
 Other local change, fantastic ! 
 
+And now, a local change from WebStorm !
