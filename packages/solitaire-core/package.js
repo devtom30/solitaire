@@ -18,7 +18,7 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('tinytest');
   api.addFiles('namespaces.js');
-  api.export('SOLCORE', ['client', 'server']);
+//  api.export('SOLCORE', ['client', 'server']);
   api.addFiles('lib/Case.js');
   api.addFiles('lib/Plateau.js');
     api.addFiles('lib/PlateauFactory.js');

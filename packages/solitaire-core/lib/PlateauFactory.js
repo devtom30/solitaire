@@ -1,4 +1,4 @@
-var PlateauFactory = (function(){
+PlateauFactory = (function(){
     /*// att privé
     var factory ;
 
@@ -30,7 +30,7 @@ var PlateauFactory = (function(){
     var createFactory;
     createFactory = function () {
         var createPlateau = function () {
-            plateau = new SOLGAM.Plateau();
+            plateau = new Plateau();
             return plateau;
         };
 

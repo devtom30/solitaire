@@ -14,10 +14,8 @@ Tinytest.add('example bis', function (test) {
 //});
 //
 Tinytest.add('Case create', function (test) {
-    console.log(SOLCOM);
-    console.log(SOLGAM);
-    monEnum = SOLGAM.relou;
-    var maCase = new SOLGAM.Case('forbidden', 34, 43);
+
+    var maCase = new Case('forbidden', 34, 43);
     test.isNotNull(maCase);
 
     test.isNotNull(maCase.getType());
@@ -26,7 +24,7 @@ Tinytest.add('Case create', function (test) {
 }); 
 
 Tinytest.add('Plateau create', function (test) {
-    plateau = new SOLGAM.Plateau();
+    plateau = new Plateau();
     test.isNotNull(plateau);
 
     grille = plateau.getGrille();
@@ -36,7 +34,7 @@ Tinytest.add('Plateau create', function (test) {
 });
 
 Tinytest.add('Plateau Factory', function (test) {
-    plateauFactory = SOLGAM.PlateauFactory.getInstance();
+    plateauFactory = PlateauFactory.getInstance();
     //plateauFactory = SOLGAM.PlateauFactory;
     test.isNotNull(plateauFactory);
     //console.log('plateauFactory', plateauFactory);
@@ -47,10 +45,10 @@ Tinytest.add('Plateau Factory', function (test) {
 });
 
 Tinytest.add('Plateau init', function (test) {
-    var plateauFactory = SOLGAM.PlateauFactory.getInstance();
+    var plateauFactory = PlateauFactory.getInstance();
     var plateau = plateauFactory.createPlateau();
     console.log(plateau);
 
     var grille = plateau.grille;
-    test.equals(grille[0][0], SOLGAM.Case.TypeEnum.FORBIDDEN);
+    test.equal(grille[0][0], Case.TypeEnum.FORBIDDEN);
 });

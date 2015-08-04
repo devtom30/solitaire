@@ -21,7 +21,7 @@ Case.prototype.getType = function() {
 
 Case.prototype.toString = function() {  
     return this.type + ' - ' + this.color;
-}; 
+};
 
 function ensureTypeIsAllowed( t, typesAllowed) {
     ok = false;
@@ -34,4 +34,3 @@ function ensureTypeIsAllowed( t, typesAllowed) {
     return ok;
 }
 
-SOLCORE.Case = Case;

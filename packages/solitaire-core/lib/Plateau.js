@@ -1,14 +1,15 @@
 //Case = SOLGAM.Case;
 
 Plateau = function () {
-    init();
+    this.grille = [];
+    this.init();
 }
 
 createCaseForbidden = function() {
     return new Case(Case.TypeEnum.FORBIDDEN);
 }
 
-function init(){
+Plateau.prototype.init = function (){
     var ligne_2forb_3full_2forb = [
         Case.TypeEnum.FORBIDDEN,
         Case.TypeEnum.FORBIDDEN,
@@ -51,7 +52,7 @@ function init(){
     ];
 
     this.grille = grille;
-}
+};
 
 Plateau.prototype.isEmptyAtPosition = function(x, y){
     this.positionStatus() === Case.TypeEnum.EMPTY;
