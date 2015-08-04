@@ -1,2 +1,2 @@
-SOLGAM = {};
+SOLCORE = {};
 //SOL-GAM = {};

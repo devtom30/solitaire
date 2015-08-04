@@ -8,9 +8,9 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.0.2.1');
   api.addFiles('namespaces.js');
-  api.export('SOLGAM', ['client', 'server']);
+  api.export('SOLCORE', ['client', 'server']);
 //    api.addFiles('lib/Case.js');
-//  api.addFiles('devtom:solitaire-game.js');
+//  api.addFiles('solitaire-core.js');
 //  api.addFiles('server/classes/Case.js');
 //    api.addFiles('lib/Case.js');
 });
@@ -18,12 +18,12 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('tinytest');
   api.addFiles('namespaces.js');
-  api.export('SOLGAM', ['client', 'server']);
+  api.export('SOLCORE', ['client', 'server']);
   api.addFiles('lib/Case.js');
   api.addFiles('lib/Plateau.js');
     api.addFiles('lib/PlateauFactory.js');
 
-    api.addFiles('devtom:solitaire-game-tests.js');
+    api.addFiles('solitaire-core-tests.js');
 //  api.addFiles('server/classes/Case.js');
 //    api.addFiles('lib/Case.js');
 });
