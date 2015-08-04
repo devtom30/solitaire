@@ -49,5 +49,5 @@ var PlateauFactory = (function(){
     }
 })();
 
-SOLGAM.PlateauFactory = PlateauFactory;
+SOLCORE.PlateauFactory = PlateauFactory;
 

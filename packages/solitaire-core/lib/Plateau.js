@@ -73,4 +73,4 @@ Plateau.prototype.getGrille = function () {
     return this.grille;
 };
 
-SOLGAM.Plateau = Plateau;
+SOLCORE.Plateau = Plateau;

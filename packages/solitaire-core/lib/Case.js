@@ -34,4 +34,4 @@ function ensureTypeIsAllowed( t, typesAllowed) {
     return ok;
 }
 
-SOLGAM.Case = Case;
+SOLCORE.Case = Case;
