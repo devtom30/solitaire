@@ -49,5 +49,4 @@ PlateauFactory = (function(){
     }
 })();
 
-SOLCORE.PlateauFactory = PlateauFactory;
 

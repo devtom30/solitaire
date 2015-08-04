@@ -74,4 +74,3 @@ Plateau.prototype.getGrille = function () {
     return this.grille;
 };
 
-SOLCORE.Plateau = Plateau;

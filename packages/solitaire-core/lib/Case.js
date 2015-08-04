@@ -1,5 +1,3 @@
-//SOLGAM = {};
-//SOLGAM.relou = 'relou';
 
 Case = function (type, x, y) {
     this.type = type;
