@@ -1,0 +1,2 @@
+SOLGAM = {};
+//SOL-GAM = {};
