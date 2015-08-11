@@ -1,8 +1,13 @@
 <template name="board">
+    {{ouhouh}}
     <div>
-        blah
-    </div>
-    <div id="grid">
+        This the famous Solitaire Board !
+        Name of this game :
 
+        {{#with board}}
+        <span>{{name}}</span>
+        {{/with}}
     </div>
+    {{> grid}}
+
 </template>

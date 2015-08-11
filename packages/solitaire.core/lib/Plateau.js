@@ -3,6 +3,7 @@
 Plateau = function () {
     this.grille = [];
     this.init();
+    this.name = 'mon super plateau'
 }
 
 createCaseForbidden = function() {
@@ -72,5 +73,9 @@ Plateau.prototype.positionStatus = function(x, y){
 
 Plateau.prototype.getGrille = function () {
     return this.grille;
+};
+
+Plateau.prototype.getName = function () {
+    return this.name;
 };
 

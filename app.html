@@ -1,18 +1,19 @@
-<head>
-  <title>hello</title>
-</head>
+<template name="ApplicationLayout">
+    <header>
+        <h1>{{title}}</h1>
+    </header>
 
-<body>
-  <h1>Welcome to Meteor!</h1>
+    <aside>
+        {{> yield "aside"}}
+    </aside>
 
-  {{> hello}}
+    <article>
+        {{> yield}}
+    </article>
 
-  {{> board}}
-</body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times, uh ?</p>
+    <footer>
+        {{> yield "footer"}}
+    </footer>
 </template>
 
 
