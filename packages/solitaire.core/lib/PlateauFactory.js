@@ -1,3 +1,4 @@
+
 PlateauFactory = (function(){
     /*// att privé
     var factory ;
@@ -49,4 +50,4 @@ PlateauFactory = (function(){
     }
 })();
 
-
+SOLCORE.PlateauFactory = PlateauFactory;

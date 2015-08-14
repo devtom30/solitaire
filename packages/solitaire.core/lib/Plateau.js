@@ -4,11 +4,11 @@ Plateau = function () {
     this.grille = [];
     this.init();
     this.name = 'mon super plateau'
-}
+};
 
 createCaseForbidden = function() {
     return new Case(Case.TypeEnum.FORBIDDEN);
-}
+};
 
 Plateau.prototype.init = function (){
     var ligne_2forb_3full_2forb = [
@@ -18,7 +18,7 @@ Plateau.prototype.init = function (){
         Case.TypeEnum.FULL,
         Case.TypeEnum.FULL,
         Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FORBIDDEN
     ];
 
     var ligne_tout_rempli = [
@@ -43,13 +43,13 @@ Plateau.prototype.init = function (){
 
     grille = [
         // ligne 1
-        ligne_2forb_3full_2forb,
-        ligne_2forb_3full_2forb,
-        ligne_tout_rempli,
-        ligne_tout_rempli_sauf_milieu,
-        ligne_tout_rempli,
-        ligne_2forb_3full_2forb,
-        ligne_2forb_3full_2forb
+        ligne_2forb_3full_2forb.slice(0),
+        ligne_2forb_3full_2forb.slice(0),
+        ligne_tout_rempli.slice(0),
+        ligne_tout_rempli_sauf_milieu.slice(0),
+        ligne_tout_rempli.slice(0),
+        ligne_2forb_3full_2forb.slice(0),
+        ligne_2forb_3full_2forb.slice(0)
     ];
 
     this.grille = grille;

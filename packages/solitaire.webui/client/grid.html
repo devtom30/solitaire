@@ -1,3 +1,11 @@
 <template name="grid">
-    {{grille}}
+    <table>
+    {{#each grille}}
+        <tr>
+            {{#each this}}
+                <td>{{this}}</td>
+            {{/each}}
+        </tr>
+    {{/each}}
+    </table>
 </template>
