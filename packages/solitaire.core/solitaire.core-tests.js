@@ -21,7 +21,7 @@ Tinytest.add('Case create', function (test) {
     test.isNotNull(maCase.getType());
     test.equal(maCase.getType(), 'forbidden');
 
-}); 
+});
 
 Tinytest.add('Plateau create', function (test) {
     plateau = new Plateau();
@@ -60,3 +60,134 @@ Tinytest.add('Plateau exportToCollection', function (test) {
     var grilleExport = plateau.exportToCollection();
     test.equal(grilleExport.length, 49);
 });
+
+Tinytest.add('Plateau nbLignesInGrille && nbColsInGrille', function (test) {
+    var plateauFactory = PlateauFactory.getInstance();
+    var plateau = plateauFactory.createPlateau();
+
+    test.equal(plateau.nbLignesInGrille(), 7);
+    test.equal(plateau.nbColsInGrille(), 7);
+    //var c1 = new Case();
+});
+
+Tinytest.add('Plateau existsCaseAtPosition', function (test) {
+    var plateauFactory = PlateauFactory.getInstance();
+    var plateau = plateauFactory.createPlateau();
+
+
+    test.isFalse(plateau.existsCaseAtPosition(10, 5));
+    test.isFalse(plateau.existsCaseAtPosition(0, -1));
+    test.isFalse(plateau.existsCaseAtPosition(-4, -1));
+});
+
+Tinytest.add('Plateau getCaseAtPosition', function (test) {
+    var plateauFactory = PlateauFactory.getInstance();
+    var plateau = plateauFactory.createPlateau();
+
+    var c1 = plateau.getCaseAtPosition(10, 5);
+    test.isNull(c1);
+    c1 = plateau.getCaseAtPosition(0, -1);
+    test.isNull(c1);
+    c1 = plateau.getCaseAtPosition(-4, -1);
+    test.isNull(c1);
+
+
+    c1 = plateau.getCaseAtPosition(0, 0);
+    test.isNotNull(c1);
+    test.isTrue(c1.isForbidden());
+    c1 = plateau.getCaseAtPosition(0, 1);
+    test.isTrue(c1.isForbidden());
+
+    var tabTests = {
+            'forbidden': {
+                0: [
+                    0, 1, 5, 6
+                ],
+                1: [
+                    0, 1, 5, 6
+                ],
+                5: [
+                    0, 1, 5, 6
+                ],
+                6: [
+                    0, 1, 5, 6
+                ]
+            },
+            'empty': {
+                3: [
+                    3
+                ]
+            }
+        };
+
+    var tabForbidden = tabTests['forbidden'];
+    var tabAllCasesTmp = [];
+    var a = 0;
+    var b = 0;
+    var aMax = 6;
+    var bMax = 6;
+    while (a <= aMax) {
+        tabAllCasesTmp[a] = [];
+        while (b <= bMax) {
+            tabAllCasesTmp[a][b] = 'TODO';
+            b++;
+        }
+        a++;
+        b = 0;
+    }
+
+    for (x in tabForbidden) {
+        var j = 0;
+        var jMax = tabForbidden[x].length;
+        while (j < jMax) {
+            var y = tabForbidden[x][j];
+            var cXY = plateau.getCaseAtPosition(x, y);
+            test.isTrue(cXY.isForbidden(), 'x : ' + x + ' - y : ' + y + ' - ' + cXY.getType());
+            tabAllCasesTmp[x][y] = 'DONE';
+            j++;
+        }
+    }
+
+    test.isTrue(plateau.getCaseAtPosition(3, 3).isEmpty());
+
+    var ii = 0;
+    var jj = 0;
+    while (ii < aMax) {
+        while (jj < bMax) {
+            if (tabAllCasesTmp[ii][jj] != 'DONE') {
+                test.isTrue(plateau.getCaseAtPosition(ii, jj).isFull());
+            }
+            jj++;
+        }
+        ii++
+    }
+
+});
+
+Tinytest.add('Plateau inverserX', function (test) {
+    var grille = [];
+
+    var iMax = 4;
+    var jMax = 4;
+    var i = 0;
+    var j = 0;
+    while (i <= iMax) {
+        grille[i] = [];
+        while (j <= jMax) {
+            grille[i][j] = i + '-' + j;
+            j++;
+        }
+        j = 0;
+        i++;
+    }
+
+    test.equal(grille[0][0], '0-0');
+    test.equal(grille[3][1], '3-1');
+    test.equal(grille[4][4], '4-4');
+
+    var newGrille = inverserX(grille);
+    test.equal(newGrille[0][4], '4-4');
+    test.equal(newGrille[1][1], '3-1');
+    test.equal(newGrille[4][0], '0-0');
+});
+

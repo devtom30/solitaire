@@ -32,3 +32,14 @@ function ensureTypeIsAllowed( t, typesAllowed) {
     return ok;
 }
 
+Case.prototype.isForbidden = function() {
+    return this.getType() === Case.TypeEnum.FORBIDDEN;
+}
+
+Case.prototype.isEmpty = function() {
+    return this.getType() === Case.TypeEnum.EMPTY;
+}
+
+Case.prototype.isFull = function() {
+    return this.getType() === Case.TypeEnum.FULL;
+}
