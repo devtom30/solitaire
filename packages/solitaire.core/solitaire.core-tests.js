@@ -52,3 +52,11 @@ Tinytest.add('Plateau init', function (test) {
     var grille = plateau.grille;
     test.equal(grille[0][0], Case.TypeEnum.FORBIDDEN);
 });
+
+Tinytest.add('Plateau exportToCollection', function (test) {
+    var plateauFactory = PlateauFactory.getInstance();
+    var plateau = plateauFactory.createPlateau();
+
+    var grilleExport = plateau.exportToCollection();
+    test.equal(grilleExport.length, 49);
+});

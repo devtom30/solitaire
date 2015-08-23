@@ -12,6 +12,8 @@ Router.route('/', function () {
         }
     });
 
+    var collectionCasesPlateau = Mongo.Collection.get('cases_plateau');
+
     console.log(SOLCORE);
     var plateauFactory = SOLCORE.PlateauFactory.getInstance();
 
@@ -20,9 +22,26 @@ Router.route('/', function () {
     console.log(plateau);
     this.render('board');
 
+    var tabCasesForSession = plateau.exportGrilleCasesForSession();
+
+    for (var sessionCaseId in tabCasesForSession) {
+        Session.set(sessionCaseId, tabCasesForSession[sessionCaseId]);
+    }
+
+
+    var tabElements = plateau.exportToCollection();
+    var i = 0;
+    for (var element in tabElements) {
+        collectionCasesPlateau.insert(element);
+    }
+
+    console.log(collectionCasesPlateau.find().count());
+
+    /*
     myVar = setTimeout(function(){
         plateau.grille[0][0] = 'alorrrrrrs';
         console.log(plateau.grille[0][0]);
         Session.set(SOLCORE.session.plateau, plateau);
     }, 3000);
+    */
 });

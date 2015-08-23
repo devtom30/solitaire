@@ -79,3 +79,47 @@ Plateau.prototype.getName = function () {
     return this.name;
 };
 
+Plateau.prototype.exportGrilleCasesForSession = function () {
+    var tab = new Array;
+    var x = 0;
+    var grille = this.getGrille();
+    while (x < grille.length) {
+        var ligne = grille[x];
+
+        var y = 0;
+        while (y < ligne.length) {
+            tab['plateau_case_' + x + '_' + y] = ligne[y];
+            y++;
+        }
+        x++;
+    }
+    return tab;
+};
+
+Plateau.prototype.exportToCollection = function () {
+    var tab = new Array;
+    var grille = this.getGrille();
+    var x = 0;
+    var grilleLength = grille.length;
+    while (x < grilleLength) {
+        var l = grille[x];
+
+        var y = 0;
+        var lLength = l.length;
+        while (y < lLength) {
+            tab.push({
+                x: x,
+                y: y,
+                value: grille[x][y]
+            });
+
+            y++;
+        }
+        x++;
+    }
+    return tab;
+};
+
+//Plateau.prototype.setCase = function (x, y, str) {
+//    this.
+//}
