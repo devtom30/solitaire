@@ -204,6 +204,28 @@ inverserX = function (tab) {
     return newTab;
 };
 
+inverserY = function (tab) {
+    var tabTmp = tab;
+    var newTab = cloneArray(tab);
+    //var newTab = tab;
+
+    var xMax = tabTmp.length - 1;
+    var yMax = tabTmp[0].length - 1;
+
+    i = 0;
+    j = yMax;
+    while (i <= xMax) {
+        while (j >= 0) {
+            newTab[i][yMax - j] = tab[i][j];
+            j--;
+        }
+        j = yMax;
+        i++;
+    }
+
+    return newTab;
+};
+
 cloneArray = function (tab) {
     var newTab = [];
 
