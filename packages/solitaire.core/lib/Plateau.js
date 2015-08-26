@@ -75,6 +75,10 @@ Plateau.prototype.getGrille = function () {
     return this.grille;
 };
 
+Plateau.prototype.setGrille = function (gr) {
+    this.grille = gr;  
+};
+
 Plateau.prototype.getCaseAtPosition = function (x, y) {
     var c = null;
     if (this.existsCaseAtPosition(x, y)) {
@@ -245,4 +249,74 @@ cloneArray = function (tab) {
     }
 
     return newTab;
+}
+
+Plateau.prototype.movePawn = function (caseFrom, caseTo) {
+    var moved = false;
+    
+    if (this.moveIsPossible(caseFrom, caseTo)) {
+        this.cleanSquare(caseFrom);
+        this.cleanSquare(this.getSquareBetweenThose(caseFrom, caseTo));
+        this.fillSquare(caseTo);
+        moved = true;
+    }
+    return moved;
+};
+
+Plateau.prototype.cleanSquare = function (sq) {
+    var gr = this.getGrille();
+    
+    gr[sq.getX()][sq.getY()] = Case.TypeEnum.EMPTY;
+    
+    this.setGrille(gr);
+};
+
+Plateau.prototype.fillSquare = function (sq) {
+    var gr = this.getGrille();
+    
+    gr[sq.getX()][sq.getY()] = Case.TypeEnum.FULL;
+    
+    this.setGrille(gr);
+};
+
+Plateau.prototype.moveIsPossible = function (caseFrom, caseTo) {
+     if (!(this.existsCaseAtPosition(caseFrom.getX(), caseFrom.getY())
+            && this.existsCaseAtPosition(caseTo.getX(), caseTo.getY()))
+        || caseFrom.isForbidden()
+        || caseTo.isForbidden()
+        || !this.distanceBetweenTwoSquaresOkForMove(caseFrom, caseTo)) {
+        return false;
+    }
+    
+    return (caseFrom.isFull() && caseTo.isEmpty() && this.squareBetweenThoseIsFull(caseFrom, caseTo));
+};
+
+Plateau.prototype.getSquareBetweenThose = function (caseFrom, caseTo) {
+    var xF = caseFrom.getX();
+    var yF = caseFrom.getY();
+    var xT = caseTo.getX();
+    var yT = caseTo.getY();
+    
+    var xB = (xF + xT) / 2;
+    var yB = (yF + yT) / 2;
+    
+    return this.getCaseAtPosition(xB, yB);
+}
+
+Plateau.prototype.squareBetweenThoseIsFull = function (caseFrom, caseTo) {
+    var squareB = this.getSquareBetweenThose(caseFrom, caseTo);
+    
+    return squareB.isFull();
+}
+
+Plateau.prototype.distanceBetweenTwoSquaresOkForMove = function (caseFrom, caseTo) {
+    var xF = caseFrom.getX();
+    var yF = caseFrom.getY();
+    var xT = caseTo.getX();
+    var yT = caseTo.getY();
+    return (
+        (xF != xT || yF != yT)
+        && (xF - xT == 0 || Math.abs(xF - xT) == 2) 
+        && (yF - yT == 0 || Math.abs(yF - yT) == 2)  
+    );
 }

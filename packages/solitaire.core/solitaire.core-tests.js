@@ -218,3 +218,33 @@ Tinytest.add('Plateau inverserY', function (test) {
     test.equal(newGrille[0][4], '0-0');
 });
 
+Tinytest.add('Plateau deplacerCase', function (test) {
+    var plateauFactory = PlateauFactory.getInstance();
+    var plateau = plateauFactory.createPlateau();
+
+    test.isNotNull(plateau);
+    
+    var xFrom = 0;
+    var yFrom = 1;
+    var xTo = 3;
+    var yTo = 3;
+    var cF = plateau.getCaseAtPosition(xFrom, yFrom);
+    var cT = plateau.getCaseAtPosition(xTo, yTo);
+    test.isFalse(plateau.moveIsPossible(cF, cT), 'this move is not possible');
+    test.isFalse(plateau.movePawn(cF, cT));
+    
+    var xFrom = 3;
+    var yFrom = 1;
+    var xTo = 3;
+    var yTo = 3;
+    var cF = plateau.getCaseAtPosition(xFrom, yFrom);
+    var cT = plateau.getCaseAtPosition(xTo, yTo);
+    test.isTrue(plateau.moveIsPossible(cF, cT), 'this move is possible');
+    test.isTrue(plateau.movePawn(cF, cT));
+    test.isTrue(plateau.getCaseAtPosition(3, 3).isFull());
+    test.isTrue(plateau.getCaseAtPosition(3, 1).isEmpty());
+    test.isTrue(plateau.getCaseAtPosition(3, 2).isEmpty());
+    
+
+});
+

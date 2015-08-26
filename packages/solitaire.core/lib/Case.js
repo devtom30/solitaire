@@ -17,6 +17,14 @@ Case.prototype.getType = function() {
     return this.type;
 };
 
+Case.prototype.getX = function() {
+    return this.x;
+}
+
+Case.prototype.getY = function() {
+    return this.y;
+}
+
 Case.prototype.toString = function() {  
     return this.type + ' - ' + this.color;
 };
