@@ -120,6 +120,8 @@ Tinytest.add('Plateau getCaseAtPosition', function (test) {
             }
         };
 
+    testWithArraySquares(test, tabTests);
+    /*
     var tabForbidden = tabTests['forbidden'];
     var tabAllCasesTmp = [];
     var a = 0;
@@ -161,7 +163,7 @@ Tinytest.add('Plateau getCaseAtPosition', function (test) {
         }
         ii++
     }
-
+*/
 });
 
 Tinytest.add('Plateau inverserX', function (test) {
@@ -245,6 +247,87 @@ Tinytest.add('Plateau deplacerCase', function (test) {
     test.isTrue(plateau.getCaseAtPosition(3, 1).isEmpty());
     test.isTrue(plateau.getCaseAtPosition(3, 2).isEmpty());
     
-
+    var tabTests = {
+            'forbidden': {
+                0: [
+                    0, 1, 5, 6
+                ],
+                1: [
+                    0, 1, 5, 6
+                ],
+                5: [
+                    0, 1, 5, 6
+                ],
+                6: [
+                    0, 1, 5, 6
+                ]
+            },
+            'empty': {
+                3: [
+                    1, 2
+                ]
+            }
+        };
+    // on teste toutes les cases du plateau
+    testWithArraySquares(test, tabTests);
 });
 
+/**
+* Fonction pour tester toutes les cases d'après un tableau
+* des cases forbidden et empty
+*/
+function testWithArraySquares (test, tabTests) {
+    var tabForbidden = tabTests['forbidden'];
+    var tabAllCasesTmp = [];
+    var a = 0;
+    var b = 0;
+    var aMax = 6;
+    var bMax = 6;
+    while (a <= aMax) {
+        tabAllCasesTmp[a] = [];
+        while (b <= bMax) {
+            tabAllCasesTmp[a][b] = 'TODO';
+            b++;
+        }
+        a++;
+        b = 0;
+    }
+
+    var tabForbidden = tabTests['forbidden'];
+    for (x in tabForbidden) {
+        var j = 0;
+        var jMax = tabForbidden[x].length;
+        while (j < jMax) {
+            var y = tabForbidden[x][j];
+            var cXY = plateau.getCaseAtPosition(x, y);
+            test.isTrue(cXY.isForbidden(), 'x : ' + x + ' - y : ' + y + ' - ' + cXY.getType(), 'case ' + x + ', ' + y + ' should be forbidden');
+            tabAllCasesTmp[x][y] = 'DONE';
+            j++;
+        }
+    }
+
+    var tabEmpty = tabTests['empty'];
+    for (x in tabEmpty) {
+        var j = 0;
+        var jMax = tabEmpty[x].length;
+        while (j < jMax) {
+            var y = tabEmpty[x][j];
+            var cXY = plateau.getCaseAtPosition(x, y);
+            test.isTrue(cXY.isEmpty(), 'x : ' + x + ' - y : ' + y + ' - ' + cXY.getType(), 'case ' + x + ', ' + y + ' should be empty');
+            tabAllCasesTmp[x][y] = 'DONE';
+            j++;
+        }
+    }
+    
+    var ii = 0;
+    var jj = 0;
+    while (ii < aMax) {
+        while (jj < bMax) {
+            if (tabAllCasesTmp[ii][jj] != 'DONE') {
+                test.isTrue(plateau.getCaseAtPosition(ii, jj).isFull(), 'case ' + ii + ', ' + jj + ' should be full');
+            }
+            jj++;
+        }
+        ii++
+    }
+}
