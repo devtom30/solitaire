@@ -15,36 +15,34 @@ Router.route('/', function () {
     var collectionCasesPlateau = Mongo.Collection.get('cases_plateau');
 
     console.log(SOLCORE);
+    console.log(SOLGAMEUI);
+
     var plateauFactory = SOLCORE.PlateauFactory.getInstance();
 
     plateau = plateauFactory.createPlateau();
-    Session.set(SOLCORE.session.plateau, plateau);
     console.log(plateau);
+    
+    var sgui = new SOLGAMEUI.SolitaireGameUI(plateau, SOLCORE.session.plateau);
+    sgui.loadGame();
+
+    var possMoves = sgui.plateau.findAllPossibleMoves();
+    console.dir('possMoves : ' + possMoves);
+    
+    setTimeout(function () {
+        var xFrom = 3;
+        var yFrom = 1;
+        var xTo = 3;
+        var yTo = 3;
+        var cF = sgui.plateau.getCaseAtPosition(xFrom, yFrom);
+        var cT = sgui.plateau.getCaseAtPosition(xTo, yTo);
+        if (sgui.plateau.movePawn(cF, cT)) {
+            sgui.recordInSession();
+        }
+        possMoves = sgui.plateau.findAllPossibleMoves();
+        console.dir('possMoves : ' + possMoves);
+    }, 3000);    
     this.render('board');
 
-    /*
-    var tabCasesForSession = plateau.exportGrilleCasesForSession();
-
-    for (var sessionCaseId in tabCasesForSession) {
-        Session.set(sessionCaseId, tabCasesForSession[sessionCaseId]);
-    }
-*/
-/*
-    var tabElements = plateau.exportToCollection();
-    var i = 0;
-    var tabElementsLength = tabElements.length;
-    while (i < tabElementsLength) {
-        collectionCasesPlateau.insert(tabElements[i]);
-        i++;
-    }
-*/
-    console.log(collectionCasesPlateau.find().count());
-
-
-    myVar = setTimeout(function(){
-        plateau.grille[0][0] = 'alorrrrrrs';
-        console.log(plateau.grille[0][0]);
-        Session.set(SOLCORE.session.plateau, plateau);
-    }, 3000);
-
 });
+
+

@@ -10,3 +10,5 @@ solitaire.webui
 solitaire.core
 iron:router
 dburles:mongo-collection-instances
+reactive-class
+reactive-var

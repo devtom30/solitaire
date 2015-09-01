@@ -9,3 +9,4 @@ Template.board.helpers({
         return plateau.name;
     }
 });
+

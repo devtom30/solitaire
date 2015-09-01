@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.addFiles('lib/Case.js');
   api.addFiles('lib/Plateau.js');
   api.addFiles('lib/PlateauFactory.js');
-  //api.addFiles('lib/Case.js');
+  api.addFiles('lib/Move.js');
 });
 
 Package.onTest(function(api) {

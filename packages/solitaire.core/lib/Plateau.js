@@ -71,7 +71,7 @@ Plateau.prototype.positionStatus = function(x, y){
     return this.grille[x][y];
 };
 
-Plateau.prototype.getGrille = function () {
+Plateau.prototype.getGrille = function (){
     return this.grille;
 };
 
@@ -107,7 +107,7 @@ Plateau.prototype.nbColsInGrille = function () {
     return grille[0].length;
 }
 
-Plateau.prototype.getName = function () {
+Plateau.prototype.getName = function (){
     return this.name;
 };
 
@@ -280,7 +280,9 @@ Plateau.prototype.fillSquare = function (sq) {
 };
 
 Plateau.prototype.moveIsPossible = function (caseFrom, caseTo) {
-     if (!(this.existsCaseAtPosition(caseFrom.getX(), caseFrom.getY())
+     if (caseFrom == null
+        || caseTo == null
+        || !(this.existsCaseAtPosition(caseFrom.getX(), caseFrom.getY())
             && this.existsCaseAtPosition(caseTo.getX(), caseTo.getY()))
         || caseFrom.isForbidden()
         || caseTo.isForbidden()
@@ -319,4 +321,38 @@ Plateau.prototype.distanceBetweenTwoSquaresOkForMove = function (caseFrom, caseT
         && (xF - xT == 0 || Math.abs(xF - xT) == 2) 
         && (yF - yT == 0 || Math.abs(yF - yT) == 2)  
     );
+}
+
+Plateau.prototype.findAllPossibleMoves = function () {
+    var possibleMoves = [];
+    var x = 0;
+    var grille = this.getGrille();
+    var grilleHeight = grille.length;
+
+    while (x < grilleHeight) {
+        var y = 0;
+        var grilleLength = grille[x].length;
+        while (y < grilleLength) {
+            var squareFrom = this.getCaseAtPosition(x, y);
+            if (! squareFrom.isForbidden()) {
+                var allMovesToTest = {
+                    'up' : new Move(squareFrom, this.getCaseAtPosition(x - 2, y)),
+                    'down' : new Move(squareFrom, this.getCaseAtPosition(x + 2, y)),
+                    'right' : new Move(squareFrom, this.getCaseAtPosition(x, y + 2)),
+                    'left' : new Move(squareFrom, this.getCaseAtPosition(x, y - 2)),
+                };
+                for (var moveDirection in allMovesToTest) {
+                    var move = allMovesToTest[moveDirection];
+                    if (this.moveIsPossible(move.getSquareFrom(), move.getSquareTo())) {
+                        possibleMoves.push(move);
+                    }
+                }
+            }
+            y++;
+        }
+        
+        x++;
+    }
+    
+    return possibleMoves;
 }
