@@ -1,5 +1,8 @@
 SOLGAMEUI = {
-    'empty' : 'o',
-    'forbidden' : '',
-    'full' : 'X'
+    'CASE_STATUS' : {}
 };
+
+
+SOLGAMEUI.CASE_STATUS[SOLCORE.Case.TypeEnum.EMPTY] = '.';
+SOLGAMEUI.CASE_STATUS[SOLCORE.Case.TypeEnum.FORBIDDEN] = '';
+SOLGAMEUI.CASE_STATUS[SOLCORE.Case.TypeEnum.FULL] = 'O';

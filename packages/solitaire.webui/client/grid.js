@@ -5,3 +5,7 @@ Template.grid.helpers({
         return plateau.grille;
     }
 });
+
+Template.grid.caseStatus = function (case_status) {
+    return SOLGAMEUI.CASE_STATUS[case_status];
+};

@@ -51,3 +51,5 @@ Case.prototype.isEmpty = function() {
 Case.prototype.isFull = function() {
     return this.getType() === Case.TypeEnum.FULL;
 }
+
+SOLCORE.Case = Case;
