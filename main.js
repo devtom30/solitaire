@@ -41,6 +41,13 @@ Router.route('/', function () {
         possMoves = sgui.plateau.findAllPossibleMoves();
         console.dir('possMoves : ' + possMoves);
     }, 3000);    
+    
+    /*
+    while (sgui.plateau.findAllPossibleMoves().length > 0) {
+        setTimeout(function () {
+            sgui.playRandomlyOnce();
+        }, 2000);
+    }*/
     this.render('board');
 
 });

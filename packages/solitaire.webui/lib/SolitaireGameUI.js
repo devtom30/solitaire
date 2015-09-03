@@ -15,4 +15,43 @@ SolitaireGameUI.prototype.recordInSession = function () {
     Session.set(this.plateauSessionName, this.plateau);
 };
 
+SolitaireGameUI.prototype.playRandomly = function (timeOut) {
+    var move = this.chooseMoveRandomly();
+    while (move != null) {
+        this.playThatMove(move);
+        move = this.chooseMoveRandomly();
+    }
+};
+
+SolitaireGameUI.prototype.chooseMoveRandomly = function () {
+    var possMoves = sgui.plateau.findAllPossibleMoves();
+    var nbPossMoves = possMoves.length;
+    var chosenMove = null;
+    if (nbPossMoves > 0) {
+        var moveIndex = randomInt(0, nbPossMoves - 1);
+        chosenMove = possMoves.get(moveIndex);
+    }
+    
+    return chosenMove;
+};
+
+SolitaireGameUI.prototype.playRandomlyOnce = function () {
+    var move = this.chooseMoveRandomly();
+    if (move != null) {
+        // do move
+        checkMove = this.playThatMove(move);
+    }
+};
+
+SolitaireGameUI.randomInt = function (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+SolitaireGameUI.prototype.playThatMove = function (move) {
+    var moveCheck = this.plateau.movePawn(move.getSquareFrom(), move.getSquareTo());
+    this.recordInSession();
+    
+    return moveCheck;
+}
+
 SOLGAMEUI.SolitaireGameUI = SolitaireGameUI;
