@@ -37,10 +37,12 @@ SolitaireGameUI.prototype.chooseMoveRandomly = function () {
 
 SolitaireGameUI.prototype.playRandomlyOnce = function () {
     var move = this.chooseMoveRandomly();
+    var checkMove = false;
     if (move != null) {
         // do move
         checkMove = this.playThatMove(move);
     }
+    return checkMove;
 };
 
 SolitaireGameUI.randomInt = function (min, max) {

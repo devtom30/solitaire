@@ -42,18 +42,13 @@ Router.route('/', function() {
         console.dir('possMoves : ' + possMoves);
     }, 3000);
 
-    var chosenMove = sgui.chooseMoveRandomly();
-    while (chosenMove != null) {
-        console.log('in the while');
-        //        var alors = setTimeout(function () {
-        sgui.playThatMove(chosenMove);
-        //        }, 2000);
-        Meteor.setTimeout(function() {
-            console.log('in the setTimeout');
-        }, 3000);
-        chosenMove = sgui.chooseMoveRandomly();
-    }
-    console.dir(chosenMove);
+    var intervalMilliSeconds = 2000;
+    var intervalId = Meteor.setInterval(function(){
+        var chosenMove = sgui.playRandomlyOnce();
+        if (! chosenMove) {
+            Meteor.clearInterval(intervalId);
+        }
+    }, intervalMilliSeconds);
 
     this.render('board');
     if (Meteor.isClient) {
