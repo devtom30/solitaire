@@ -10,3 +10,4 @@ Template.board.helpers({
     }
 });
 
+

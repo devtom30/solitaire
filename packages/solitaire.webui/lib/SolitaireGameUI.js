@@ -24,12 +24,12 @@ SolitaireGameUI.prototype.playRandomly = function (timeOut) {
 };
 
 SolitaireGameUI.prototype.chooseMoveRandomly = function () {
-    var possMoves = sgui.plateau.findAllPossibleMoves();
+    var possMoves = this.plateau.findAllPossibleMoves();
     var nbPossMoves = possMoves.length;
     var chosenMove = null;
     if (nbPossMoves > 0) {
-        var moveIndex = randomInt(0, nbPossMoves - 1);
-        chosenMove = possMoves.get(moveIndex);
+        var moveIndex = SolitaireGameUI.randomInt(0, nbPossMoves - 1);
+        chosenMove = possMoves[moveIndex];
     }
     
     return chosenMove;
