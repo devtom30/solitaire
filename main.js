@@ -51,6 +51,7 @@ Router.route('/', function() {
     }, intervalMilliSeconds);
 
     this.render('board');
+    
     if (Meteor.isClient) {
         Template.body.events = ({
             'keyup': function(evt) {

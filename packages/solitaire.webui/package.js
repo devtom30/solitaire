@@ -11,6 +11,6 @@ Package.onUse(function(api) {
   api.use('solitaire.core');
   api.addFiles('namespaces.js');
   api.export('SOLGAMEUI', ['client', 'server']);
-  api.addFiles(['client/board.html', 'client/grid.html', 'client/board.js', 'client/grid.js', 'lib/SolitaireGameUI.js'], 'client');
+  api.addFiles(['client/board.html', 'client/grid.html', 'client/cuteGrid.html', 'client/board.js', 'client/grid.js', 'client/cuteGrid.js', 'lib/SolitaireGameUI.js'], 'client');
   
 });
