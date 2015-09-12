@@ -3,7 +3,9 @@
     {{#each grille}}
         <div class="cuteGridLine">
             {{#each this}}
-                <span class="cuteGridLineSquare">{{cuteSquare this}}</span>
+                <span class="cuteGridLineSquare">
+                    {{> cuteSquare square = this}}
+                </span>
             {{/each}}
         </div>
     {{/each}}
