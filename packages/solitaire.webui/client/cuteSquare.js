@@ -1,22 +1,31 @@
 Template.cuteSquare.helpers({
-    drawCuteSquare: function(square){
+    squareStatus: function(square) {
         return square;
     },
-  //  rendered: 
+    //  rendered: 
 });
 
-Template.cuteSquare.rendered = function(){
+Template.cuteSquare.rendered = function() {
     var self = this;
     var canvas = self.$("canvas").get(0);
-    var ctx=canvas.getContext("2d");
-    ctx.rect(1,1,20,20);
-    ctx.stroke();
-};
-
-var f = function() {
-    
-    var c=Template.cuteSquare.cuteSquareCanvas;
-var ctx=c.getContext("2d");
-ctx.rect(20,20,150,100);
-ctx.stroke();
+    if ($(canvas).data('status') != SOLCORE.Case.TypeEnum.FORBIDDEN) {
+        var canvasWidth = canvas.width;
+        var rectWidth = canvasWidth;
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.rect(0, 0, rectWidth, rectWidth);
+        ctx.stroke();
+        if ($(canvas).data('status') == SOLCORE.Case.TypeEnum.FULL) {
+            var centerX = rectWidth / 2;
+            var centerY = centerX;
+            var radius = rectWidth * 30 / 100; 
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+            ctx.strokeStyle = '#003300';
+            ctx.stroke();
+        }
+        
+    }
 };

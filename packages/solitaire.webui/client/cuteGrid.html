@@ -1,11 +1,11 @@
 <template name="cuteGrid">
-    <div id="cuteGrid" class="cuteGrid">
+    <div id="cuteGrid" class="cuteGrid" style="width: 100%;">
     {{#each grille}}
-        <div class="cuteGridLine">
+        <div class="cuteGridLine" style="width: 100%;">
             {{#each this}}
-                <span class="cuteGridLineSquare">
+            
                     {{> cuteSquare square = this}}
-                </span>
+                    
             {{/each}}
         </div>
     {{/each}}

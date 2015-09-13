@@ -3,6 +3,5 @@ _site/
 .bundle/
 *.iml
 .idea
-packages
 *.lock
 .DS_STORE
