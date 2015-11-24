@@ -21,7 +21,7 @@ Package.onTest(function(api) {
 //  api.export('SOLCORE', ['client', 'server']);
   api.addFiles('lib/Case.js');
   api.addFiles('lib/Plateau.js');
-    api.addFiles('lib/PlateauFactory.js');
+  api.addFiles('lib/PlateauFactory.js');
 
     api.addFiles('solitaire.core-tests.js');
 //  api.addFiles('server/classes/Case.js');

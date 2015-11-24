@@ -10,7 +10,7 @@ solitaire.webui
 solitaire.core
 iron:router
 dburles:mongo-collection-instances
-reactive-class
 reactive-var
 less
 nemo64:bootstrap
+solitaire.findallsolutions
