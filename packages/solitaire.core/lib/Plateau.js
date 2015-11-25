@@ -56,15 +56,15 @@ Plateau.prototype.init = function (){
 };
 
 Plateau.prototype.isEmptyAtPosition = function(x, y){
-    this.positionStatus() === Case.TypeEnum.EMPTY;
+    return this.positionStatus() === Case.TypeEnum.EMPTY;
 };
 
 Plateau.prototype.isFullAtPosition = function(x, y){
-    this.positionStatus() === Case.TypeEnum.FULL;
+    return this.positionStatus() === Case.TypeEnum.FULL;
 };
 
 Plateau.prototype.isForbiddenAtPosition = function(x, y){
-    this.positionStatus() === Case.TypeEnum.FORBIDDEN;
+    return this.positionStatus() === Case.TypeEnum.FORBIDDEN;
 };
 
 Plateau.prototype.positionStatus = function(x, y){
@@ -87,7 +87,7 @@ Plateau.prototype.getCaseAtPosition = function (x, y) {
     }
 
     return c;
-}
+};
 
 Plateau.prototype.existsCaseAtPosition = function (x, y) {
     var grille = this.getGrille();
@@ -95,24 +95,24 @@ Plateau.prototype.existsCaseAtPosition = function (x, y) {
         && y >= 0
         && x < this.nbLignesInGrille()
         && y < this.nbColsInGrille());
-}
+};
 
 Plateau.prototype.nbLignesInGrille = function () {
     var grille = this.getGrille();
     return grille.length;
-}
+};
 
 Plateau.prototype.nbColsInGrille = function () {
     var grille = this.getGrille();
     return grille[0].length;
-}
+};
 
 Plateau.prototype.getName = function (){
     return this.name;
 };
 
 Plateau.prototype.exportGrilleCasesForSession = function () {
-    var tab = new Array;
+    var tab = new Array();
     var x = 0;
     var grille = this.getGrille();
     while (x < grille.length) {
@@ -249,7 +249,7 @@ cloneArray = function (tab) {
     }
 
     return newTab;
-}
+};
 
 Plateau.prototype.movePawn = function (caseFrom, caseTo) {
     var moved = false;
@@ -303,13 +303,13 @@ Plateau.prototype.getSquareBetweenThose = function (caseFrom, caseTo) {
     var yB = (yF + yT) / 2;
     
     return this.getCaseAtPosition(xB, yB);
-}
+};
 
 Plateau.prototype.squareBetweenThoseIsFull = function (caseFrom, caseTo) {
     var squareB = this.getSquareBetweenThose(caseFrom, caseTo);
     
     return squareB.isFull();
-}
+};
 
 Plateau.prototype.distanceBetweenTwoSquaresOkForMove = function (caseFrom, caseTo) {
     var xF = caseFrom.getX();
@@ -321,7 +321,7 @@ Plateau.prototype.distanceBetweenTwoSquaresOkForMove = function (caseFrom, caseT
         && (xF - xT == 0 || Math.abs(xF - xT) == 2) 
         && (yF - yT == 0 || Math.abs(yF - yT) == 2)  
     );
-}
+};
 
 Plateau.prototype.findAllPossibleMoves = function () {
     var possibleMoves = [];
@@ -339,7 +339,7 @@ Plateau.prototype.findAllPossibleMoves = function () {
                     'up' : new Move(squareFrom, this.getCaseAtPosition(x - 2, y)),
                     'down' : new Move(squareFrom, this.getCaseAtPosition(x + 2, y)),
                     'right' : new Move(squareFrom, this.getCaseAtPosition(x, y + 2)),
-                    'left' : new Move(squareFrom, this.getCaseAtPosition(x, y - 2)),
+                    'left' : new Move(squareFrom, this.getCaseAtPosition(x, y - 2))
                 };
                 for (var moveDirection in allMovesToTest) {
                     var move = allMovesToTest[moveDirection];
@@ -355,4 +355,28 @@ Plateau.prototype.findAllPossibleMoves = function () {
     }
     
     return possibleMoves;
-}
+};
+
+/**
+ * To find all possible states of the grid at next turn
+ */
+Plateau.prototype.findAllPossibleNextGrids = function () {
+    var possibleGrids = Array();
+
+    var possibleMoves = this.findAllPossibleMoves();
+    var countPossibleMoves = possibleMoves.length;
+    var currentGrid = this.getGrille();
+    var i = 0;
+    while (i < countPossibleMoves) {
+        var possibleMove = possibleMoves[i];
+        // do the move
+        this.movePawn(possibleMove.getSquareFrom(), possibleMove.getSquareTo());
+        possibleGrids.push(this.getGrille());
+        // cancel move by overwritting grid with previous grid
+        this.setGrille(currentGrid);
+
+        i++;
+    }
+
+    return possibleGrids;
+};
