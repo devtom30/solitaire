@@ -12,7 +12,7 @@ createCaseForbidden = function() {
 
 Plateau.prototype.init = function (){
 
-    this.grille = this.InitialGrid;
+    this.grille = Plateau.InitialGrid;
 };
 
 Plateau.prototype.isEmptyAtPosition = function(x, y){
@@ -341,7 +341,7 @@ Plateau.prototype.findAllPossibleNextGrids = function () {
     return possibleGrids;
 };
 
-Plateau.prototype.InitialGrid = [
+Plateau.InitialGrid = [
     [
         Case.TypeEnum.FORBIDDEN,
         Case.TypeEnum.FORBIDDEN,
