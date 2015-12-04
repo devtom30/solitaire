@@ -405,3 +405,5 @@ Plateau.InitialGrid = [
         Case.TypeEnum.FORBIDDEN
     ]
 ];
+
+SOLCORE.Plateau = Plateau;
