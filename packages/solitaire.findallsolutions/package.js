@@ -16,8 +16,8 @@ Package.onUse(function (api) {
 Package.onTest(function (api) {
     api.use('tinytest');
     api.use('solitaire.core');
+    api.use('solitaire.tools');
     api.addFiles('namespaces.js');
-
     api.addFiles(['lib/GameLauncher.js']);
     api.addFiles('solitaire.findallsolutions-tests.js')
 });

@@ -27,6 +27,8 @@ Tinytest.add('GameLauncher createPlateau', function (test) {
     gameLauncher.createGame();
 
     test.isNotNull(gameLauncher.getPlateau(), 'gameLauncher.plateau is null');
+    // test if grid is the expected initial grid
+    test.isTrue(gameLauncher.getPlateau().getGrille().equals(SOLCORE.Plateau.InitialGrid));
 });
 
 Tinytest.add('gamelauncher findPossibleMoves', function (test) {
