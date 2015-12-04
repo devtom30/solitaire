@@ -11,9 +11,16 @@ Package.onUse(function(api) {
     api.addFiles('namespaces.js');
     api.export('SOLTOOLS', ['client', 'server']);
     api.addFiles([
+        'lib/ArrayCompare.js',
+    ]);
+});
 
-    ],
-        'client'
-    );
-
+Package.onTest(function (api) {
+    api.use('tinytest');
+    api.use('solitaire.tools');
+    api.addFiles('namespaces.js');
+    api.addFiles([
+        'lib/ArrayCompare.js',
+        'tests/solitaire.tools-tests.js'
+    ]);
 });
