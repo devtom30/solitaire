@@ -11,48 +11,8 @@ createCaseForbidden = function() {
 };
 
 Plateau.prototype.init = function (){
-    var ligne_2forb_3full_2forb = [
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN
-    ];
 
-    var ligne_tout_rempli = [
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL
-    ];
-
-    var ligne_tout_rempli_sauf_milieu = [
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.EMPTY,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL
-    ];
-
-    grille = [
-        // ligne 1
-        ligne_2forb_3full_2forb.slice(0),
-        ligne_2forb_3full_2forb.slice(0),
-        ligne_tout_rempli.slice(0),
-        ligne_tout_rempli_sauf_milieu.slice(0),
-        ligne_tout_rempli.slice(0),
-        ligne_2forb_3full_2forb.slice(0),
-        ligne_2forb_3full_2forb.slice(0)
-    ];
-
-    this.grille = grille;
+    this.grille = this.InitialGrid;
 };
 
 Plateau.prototype.isEmptyAtPosition = function(x, y){
@@ -380,3 +340,68 @@ Plateau.prototype.findAllPossibleNextGrids = function () {
 
     return possibleGrids;
 };
+
+Plateau.prototype.InitialGrid = [
+    [
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FORBIDDEN
+    ],
+    [
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FORBIDDEN
+    ],
+    [
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL
+    ],
+    [
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.EMPTY,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL
+    ],
+    [
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL
+    ],[
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FORBIDDEN
+    ],
+    [
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FULL,
+        Case.TypeEnum.FORBIDDEN,
+        Case.TypeEnum.FORBIDDEN
+    ]
+];
