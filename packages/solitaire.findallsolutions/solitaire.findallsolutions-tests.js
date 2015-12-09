@@ -29,6 +29,7 @@ Tinytest.add('GameLauncher createPlateau', function (test) {
     test.isNotNull(gameLauncher.getPlateau(), 'gameLauncher.plateau is null');
     // test if grid is the expected initial grid
     test.isTrue(gameLauncher.getPlateau().getGrille().equals(SOLCORE.Plateau.InitialGrid));
+    test.isTrue(initialGrid.equals(SOLCORE.Plateau.InitialGrid));
 });
 
 Tinytest.add('gamelauncher findPossibleMoves', function (test) {
@@ -56,4 +57,16 @@ Tinytest.add('gamelauncher findPossibleGrids in depth', function (test) {
 
     var possGrids = gameLauncher.getPlateau().findAllPossibleNextGrids();
     // now we test what is in this array
+
+    // next possibilities for the grid
+    var possGridStep1 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+        [o, o, o, o, o, o, o],
+        [o, e, e, o, o, o, o],
+        [o, o, o, o, o, o, o],
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
 });

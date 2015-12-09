@@ -12,6 +12,7 @@ Package.onUse(function(api) {
     api.export('SOLTOOLS', ['client', 'server']);
     api.addFiles([
         'lib/ArrayCompare.js',
+        'lib/CoordinatesManipulation.js'
     ]);
 });
 
@@ -21,6 +22,7 @@ Package.onTest(function (api) {
     api.addFiles('namespaces.js');
     api.addFiles([
         'lib/ArrayCompare.js',
+        'lib/CoordinatesManipulation.js',
         'tests/solitaire.tools-tests.js'
     ]);
 });

@@ -166,60 +166,6 @@ Tinytest.add('Plateau getCaseAtPosition', function (test) {
 */
 });
 
-Tinytest.add('Plateau inverserX', function (test) {
-    var grille = [];
-
-    var iMax = 4;
-    var jMax = 4;
-    var i = 0;
-    var j = 0;
-    while (i <= iMax) {
-        grille[i] = [];
-        while (j <= jMax) {
-            grille[i][j] = i + '-' + j;
-            j++;
-        }
-        j = 0;
-        i++;
-    }
-
-    test.equal(grille[0][0], '0-0');
-    test.equal(grille[3][1], '3-1');
-    test.equal(grille[4][4], '4-4');
-
-    var newGrille = inverserX(grille);
-    test.equal(newGrille[0][4], '4-4');
-    test.equal(newGrille[1][1], '3-1');
-    test.equal(newGrille[4][0], '0-0');
-});
-
-Tinytest.add('Plateau inverserY', function (test) {
-    var grille = [];
-
-    var iMax = 4;
-    var jMax = 4;
-    var i = 0;
-    var j = 0;
-    while (i <= iMax) {
-        grille[i] = [];
-        while (j <= jMax) {
-            grille[i][j] = i + '-' + j;
-            j++;
-        }
-        j = 0;
-        i++;
-    }
-
-    test.equal(grille[0][0], '0-0');
-    test.equal(grille[3][1], '3-1');
-    test.equal(grille[4][4], '4-4');
-
-    var newGrille = inverserY(grille);
-    test.equal(newGrille[4][0], '4-4');
-    test.equal(newGrille[3][3], '3-1');
-    test.equal(newGrille[0][4], '0-0');
-});
-
 Tinytest.add('Plateau deplacerCase', function (test) {
     var plateauFactory = PlateauFactory.getInstance();
     var plateau = plateauFactory.createPlateau();
