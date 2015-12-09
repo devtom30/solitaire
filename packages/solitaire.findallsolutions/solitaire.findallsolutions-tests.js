@@ -6,16 +6,6 @@ var x = SOLCORE.Case.TypeEnum.FORBIDDEN;
 var o = SOLCORE.Case.TypeEnum.FULL;
 var e = SOLCORE.Case.TypeEnum.EMPTY;
 
-var initialGrid = [
-    [x, x, o, o, o, x, x],
-    [x, x, o, o, o, x, x],
-    [o, o, o, o, o, o, o],
-    [o, o, o, e, o, o, o],
-    [o, o, o, o, o, o, o],
-    [x, x, o, o, o, x, x],
-    [x, x, o, o, o, x, x],
-];
-
 Tinytest.add('GameLauncher constructor', function (test) {
     var gameLauncher = new GameLauncher();
     test.isNotNull(gameLauncher, 'gameLauncher is null');
@@ -28,8 +18,7 @@ Tinytest.add('GameLauncher createPlateau', function (test) {
 
     test.isNotNull(gameLauncher.getPlateau(), 'gameLauncher.plateau is null');
     // test if grid is the expected initial grid
-    test.isTrue(gameLauncher.getPlateau().getGrille().equals(SOLCORE.Plateau.InitialGrid));
-    test.isTrue(initialGrid.equals(SOLCORE.Plateau.InitialGrid));
+    test.isTrue(gameLauncher.getPlateau().isInitial());
 });
 
 Tinytest.add('gamelauncher findPossibleMoves', function (test) {

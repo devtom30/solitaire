@@ -18,7 +18,6 @@ Package.onUse(function(api) {
 
 Package.onTest(function (api) {
     api.use('tinytest');
-    api.use('solitaire.core');
     api.addFiles('namespaces.js');
     api.addFiles([
         'lib/ArrayCompare.js',

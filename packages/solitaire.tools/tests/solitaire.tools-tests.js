@@ -1,22 +1,22 @@
-var x = SOLCORE.Case.TypeEnum.FORBIDDEN;
-var o = SOLCORE.Case.TypeEnum.FULL;
-var e = SOLCORE.Case.TypeEnum.EMPTY;
+var x = 'forbidden';
+var o = 'full';
+var e = 'empty';
 
 Tinytest.add('tools ArrayCompare', function (test) {
     var t1 = ['a', 'b', 'c'];
     var t2 = ['a', 'b', 'c'];
 
-    test.isTrue(t1.equals(t2));
+    test.isTrue(ArrayCompare.equals(t1, t2));
 
     var t3 = ['a', ['b', 'c']];
-    test.isFalse(t1.equals(t3));
+    test.isFalse(ArrayCompare.equals(t1, t3));
 
     var t4 = ['a', ['b', 'c'], ['b', 'c']];
-    test.isFalse(t1.equals(t4));
+    test.isFalse(ArrayCompare.equals(t1, t4));
 
     var t5 = ['b', 'c'];
     var t6 = ['a', t5, ['b', 'c']];
-    test.isTrue(t4.equals(t6));
+    test.isTrue(ArrayCompare.equals(t4, t6));
 });
 
 Tinytest.add('solitaire.tools inverserX', function (test) {
@@ -127,10 +127,10 @@ Tinytest.add('solitaire.tools doQuarterTurn', function (test) {
         console.log('Exception : ' + err);
     }
 
-    test.isTrue(possGridStep1_1_quarterTurned.equals(possGridStep1_2));
-    test.isTrue(possGridStep1_2_quarterTurned.equals(possGridStep1_3));
-    test.isTrue(possGridStep1_3_quarterTurned.equals(possGridStep1_4));
-    test.isTrue(possGridStep1_4_quarterTurned.equals(possGridStep1_1));
+    test.isTrue(ArrayCompare.equals(possGridStep1_1_quarterTurned, possGridStep1_2));
+    test.isTrue(ArrayCompare.equals(possGridStep1_2_quarterTurned, possGridStep1_3));
+    test.isTrue(ArrayCompare.equals(possGridStep1_3_quarterTurned, possGridStep1_4));
+    test.isTrue(ArrayCompare.equals(possGridStep1_4_quarterTurned, possGridStep1_1));
 });
 
 Tinytest.add('solitaire.tools doQuarterTurn 2', function (test) {
@@ -187,10 +187,10 @@ Tinytest.add('solitaire.tools doQuarterTurn 2', function (test) {
         console.log('Exception : ' + err);
     }
 
-    test.isTrue(possGridStep1_1_quarterTurned.equals(possGridStep1_2));
-    test.isTrue(possGridStep1_2_quarterTurned.equals(possGridStep1_3));
-    test.isTrue(possGridStep1_3_quarterTurned.equals(possGridStep1_4));
-    test.isTrue(possGridStep1_4_quarterTurned.equals(possGridStep1_1));
+    test.isTrue(ArrayCompare.equals(possGridStep1_1_quarterTurned, possGridStep1_2));
+    test.isTrue(ArrayCompare.equals(possGridStep1_2_quarterTurned, possGridStep1_3));
+    test.isTrue(ArrayCompare.equals(possGridStep1_3_quarterTurned, possGridStep1_4));
+    test.isTrue(ArrayCompare.equals(possGridStep1_4_quarterTurned, possGridStep1_1));
 });
 
 Tinytest.add('solitaire.tools yet an other test', function (test) {

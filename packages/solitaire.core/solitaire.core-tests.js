@@ -23,31 +23,104 @@ Tinytest.add('Case create', function (test) {
 
 });
 
-Tinytest.add('Plateau create', function (test) {
-    plateau = new Plateau();
-    test.isNotNull(plateau);
+Tinytest.add('Plateau initial grid', function (test) {
+    var initialGridRef = [
+        [
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN
+        ],
+        [
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN
+        ],
+        [
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL
+        ],
+        [
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.EMPTY,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL
+        ],
+        [
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL
+        ],[
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN
+        ],
+        [
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN
+        ]
+    ];
 
-    grille = plateau.getGrille();
+    var plateau = new Plateau();
+    test.isTrue(SOLTOOLS.ArrayCompare.equals(plateau.getGrille(), initialGridRef));
+    test.isTrue(plateau.isInitial());
+});
+
+Tinytest.add('Plateau create', function (test) {
+    var plateau = new Plateau();
+    test.isNotNull(plateau);
+    test.isTrue(plateau.getCaseAtPosition(3, 3).isEmpty());
+    test.isTrue(plateau.getCaseAtPosition(2, 3).isFull());
+    test.isTrue(plateau.getCaseAtPosition(3, 4).isFull());
+    test.isTrue(plateau.getCaseAtPosition(2, 2).isFull());
+    test.isTrue(plateau.getCaseAtPosition(4, 4).isFull());
+
+    test.isTrue(plateau.isInitial());
+
+    var grille = plateau.getGrille();
     test.isNotNull(grille);
-    console.log('grille : ');
-    console.log(grille);
 });
 
 Tinytest.add('Plateau Factory', function (test) {
-    plateauFactory = PlateauFactory.getInstance();
+    var plateauFactory = PlateauFactory.getInstance();
     //plateauFactory = SOLGAM.PlateauFactory;
     test.isNotNull(plateauFactory);
     //console.log('plateauFactory', plateauFactory);
     var plateau = plateauFactory.createPlateau();
     test.isNotNull(plateau);
-    console.log('plateau : ');
-    console.log(plateau);
 });
 
 Tinytest.add('Plateau init', function (test) {
     var plateauFactory = PlateauFactory.getInstance();
     var plateau = plateauFactory.createPlateau();
-    console.log(plateau);
 
     var grille = plateau.grille;
     test.equal(grille[0][0], Case.TypeEnum.FORBIDDEN);
@@ -81,8 +154,13 @@ Tinytest.add('Plateau existsCaseAtPosition', function (test) {
 });
 
 Tinytest.add('Plateau getCaseAtPosition', function (test) {
-    var plateauFactory = PlateauFactory.getInstance();
-    var plateau = plateauFactory.createPlateau();
+    var plateau = new Plateau();
+    test.isNotNull(plateau);
+    test.isTrue(plateau.getCaseAtPosition(3, 3).isEmpty());
+    test.isTrue(plateau.getCaseAtPosition(2, 3).isFull());
+    test.isTrue(plateau.getCaseAtPosition(3, 4).isFull());
+    test.isTrue(plateau.getCaseAtPosition(2, 2).isFull());
+    test.isTrue(plateau.getCaseAtPosition(4, 4).isFull());
 
     var c1 = plateau.getCaseAtPosition(10, 5);
     test.isNull(c1);
@@ -90,7 +168,6 @@ Tinytest.add('Plateau getCaseAtPosition', function (test) {
     test.isNull(c1);
     c1 = plateau.getCaseAtPosition(-4, -1);
     test.isNull(c1);
-
 
     c1 = plateau.getCaseAtPosition(0, 0);
     test.isNotNull(c1);
@@ -120,7 +197,7 @@ Tinytest.add('Plateau getCaseAtPosition', function (test) {
             }
         };
 
-    testWithArraySquares(test, tabTests);
+    testWithArraySquares(plateau, test, tabTests);
     /*
     var tabForbidden = tabTests['forbidden'];
     var tabAllCasesTmp = [];
@@ -167,8 +244,14 @@ Tinytest.add('Plateau getCaseAtPosition', function (test) {
 });
 
 Tinytest.add('Plateau deplacerCase', function (test) {
-    var plateauFactory = PlateauFactory.getInstance();
-    var plateau = plateauFactory.createPlateau();
+    var plateau = new Plateau();
+    test.isNotNull(plateau);
+    test.isTrue(plateau.getCaseAtPosition(3, 3).isEmpty());
+    test.isTrue(plateau.getCaseAtPosition(2, 3).isFull());
+    test.isTrue(plateau.getCaseAtPosition(3, 4).isFull());
+    test.isTrue(plateau.getCaseAtPosition(2, 2).isFull());
+    test.isTrue(plateau.getCaseAtPosition(4, 4).isFull());
+    test.isTrue(plateau.isInitial());
 
     test.isNotNull(plateau);
     
@@ -180,18 +263,24 @@ Tinytest.add('Plateau deplacerCase', function (test) {
     var cT = plateau.getCaseAtPosition(xTo, yTo);
     test.isFalse(plateau.moveIsPossible(cF, cT), 'this move is not possible');
     test.isFalse(plateau.movePawn(cF, cT));
-    
+    test.isTrue(plateau.isInitial(), 'plateau should be initial');
+
     var xFrom = 3;
     var yFrom = 1;
     var xTo = 3;
     var yTo = 3;
     var cF = plateau.getCaseAtPosition(xFrom, yFrom);
     var cT = plateau.getCaseAtPosition(xTo, yTo);
+    test.isTrue(plateau.isInitial(), 'plateau should be initial');
     test.isTrue(plateau.moveIsPossible(cF, cT), 'this move is possible');
+    test.isTrue(plateau.isInitial(), 'plateau should be initial');
     test.isTrue(plateau.movePawn(cF, cT));
     test.isTrue(plateau.getCaseAtPosition(3, 3).isFull());
     test.isTrue(plateau.getCaseAtPosition(3, 1).isEmpty());
     test.isTrue(plateau.getCaseAtPosition(3, 2).isEmpty());
+    console.log('alors');
+    test.isFalse(plateau.isInitial(), 'plateau should not be initial');
+    console.log('alors');
     
     var tabTests = {
             'forbidden': {
@@ -215,14 +304,14 @@ Tinytest.add('Plateau deplacerCase', function (test) {
             }
         };
     // on teste toutes les cases du plateau
-    testWithArraySquares(test, tabTests);
+    testWithArraySquares(plateau, test, tabTests);
 });
 
 /**
 * Fonction pour tester toutes les cases d'après un tableau
 * des cases forbidden et empty
 */
-function testWithArraySquares (test, tabTests) {
+function testWithArraySquares (plateau, test, tabTests) {
     var tabForbidden = tabTests['forbidden'];
     var tabAllCasesTmp = [];
     var a = 0;
@@ -246,7 +335,7 @@ function testWithArraySquares (test, tabTests) {
         while (j < jMax) {
             var y = tabForbidden[x][j];
             var cXY = plateau.getCaseAtPosition(x, y);
-            test.isTrue(cXY.isForbidden(), 'x : ' + x + ' - y : ' + y + ' - ' + cXY.getType(), 'case ' + x + ', ' + y + ' should be forbidden');
+            test.isTrue(cXY.isForbidden(), 'x : ' + x + ' - y : ' + y + ' - ' + cXY.getType() + ' should be forbidden', 'case ' + x + ', ' + y + ' should be forbidden');
             tabAllCasesTmp[x][y] = 'DONE';
             j++;
         }
@@ -259,7 +348,7 @@ function testWithArraySquares (test, tabTests) {
         while (j < jMax) {
             var y = tabEmpty[x][j];
             var cXY = plateau.getCaseAtPosition(x, y);
-            test.isTrue(cXY.isEmpty(), 'x : ' + x + ' - y : ' + y + ' - ' + cXY.getType(), 'case ' + x + ', ' + y + ' should be empty');
+            test.isTrue(cXY.isEmpty(), 'x : ' + x + ' - y : ' + y + ' - ' + cXY.getType() + ' should be empty', 'case ' + x + ', ' + y + ' should be empty');
             tabAllCasesTmp[x][y] = 'DONE';
             j++;
         }

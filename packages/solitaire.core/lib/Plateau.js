@@ -2,8 +2,74 @@
 
 Plateau = function () {
     this.grille = [];
+    this.name = 'mon super plateau';
+
+    this.initialGrid = [
+        [
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN
+        ],
+        [
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN
+        ],
+        [
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL
+        ],
+        [
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.EMPTY,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL
+        ],
+        [
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL
+        ], [
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN
+        ],
+        [
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FULL,
+            Case.TypeEnum.FORBIDDEN,
+            Case.TypeEnum.FORBIDDEN
+        ]
+    ];
+
     this.init();
-    this.name = 'mon super plateau'
 };
 
 createCaseForbidden = function() {
@@ -11,8 +77,18 @@ createCaseForbidden = function() {
 };
 
 Plateau.prototype.init = function (){
-
-    this.grille = Plateau.InitialGrid;
+    var grille = [];
+    var iMax = this.initialGrid.length;
+    var i = 0;
+    while (i < iMax) {
+        grille.push(this.initialGrid[i].slice(0));
+        i++;
+    }
+    this.setGrille(grille);
+    console.log(this.getCaseAtPosition(3, 3).isEmpty());
+    if (! (this.getCaseAtPosition(3, 3).isEmpty())) {
+        console.trace();
+    }
 };
 
 Plateau.prototype.isEmptyAtPosition = function(x, y){
@@ -36,7 +112,7 @@ Plateau.prototype.getGrille = function (){
 };
 
 Plateau.prototype.setGrille = function (gr) {
-    this.grille = gr;  
+    this.grille = gr;
 };
 
 Plateau.prototype.getCaseAtPosition = function (x, y) {
@@ -156,11 +232,11 @@ Plateau.prototype.cleanSquare = function (sq) {
 };
 
 Plateau.prototype.fillSquare = function (sq) {
-    var gr = this.getGrille();
+    var gr = this.getGrille().slice(0);
     
     gr[sq.getX()][sq.getY()] = Case.TypeEnum.FULL;
     
-    this.setGrille(gr);
+    this.setGrille(gr.slice(0));
 };
 
 Plateau.prototype.moveIsPossible = function (caseFrom, caseTo) {
@@ -265,69 +341,15 @@ Plateau.prototype.findAllPossibleNextGrids = function () {
     return possibleGrids;
 };
 
-Plateau.InitialGrid = [
-    [
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN
-    ],
-    [
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN
-    ],
-    [
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL
-    ],
-    [
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.EMPTY,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL
-    ],
-    [
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL
-    ],[
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN
-    ],
-    [
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FULL,
-        Case.TypeEnum.FORBIDDEN,
-        Case.TypeEnum.FORBIDDEN
-    ]
-];
+Plateau.prototype.isInitial = function () {
+    if (this.initialGrid[3][3] != 'empty') {
+        console.log('isInitial');
+        console.log(this.initialGrid);
+        console.trace();
+    }else{
+        console.log('good');
+    }
+    return (SOLTOOLS.ArrayCompare.equals(this.initialGrid.slice(0), this.grille.slice(0)));
+};
 
 SOLCORE.Plateau = Plateau;

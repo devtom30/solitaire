@@ -7,6 +7,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0.2.1');
+  api.use('solitaire.tools');
   api.addFiles('namespaces.js');
   api.export('SOLCORE', ['client', 'server']);
   api.addFiles('lib/Case.js');
@@ -17,6 +18,7 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
+  api.use('solitaire.tools');
   api.addFiles('namespaces.js');
 //  api.export('SOLCORE', ['client', 'server']);
   api.addFiles('lib/Case.js');

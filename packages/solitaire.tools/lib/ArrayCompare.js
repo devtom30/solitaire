@@ -1,28 +1,29 @@
-// Warn if overriding existing method
-if(Array.prototype.equals)
-    console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
-// attach the .equals method to Array's prototype to call it on any array
-Array.prototype.equals = function (array) {
+ArrayCompare = function () {
+
+};
+
+ArrayCompare.equals = function (a1, a2) {
+
     // if the other array is a falsy value, return
-    if (!array)
+    if (!a1 || !a2)
         return false;
 
     // compare lengths - can save a lot of time
-    if (this.length != array.length)
+    if (a1.length != a2.length)
         return false;
 
-    for (var i = 0, l=this.length; i < l; i++) {
+    for (var i = 0, l = a1.length; i < l; i++) {
         // Check if we have nested arrays
-        if (this[i] instanceof Array && array[i] instanceof Array) {
+        if (a1[i] instanceof Array && a2[i] instanceof Array) {
             // recurse into the nested arrays
-            if (!this[i].equals(array[i]))
+            if (! (ArrayCompare.equals(a1[i], a2[i])))
                 return false;
-        }else if (this[i] != array[i]) {
+        }else if (a1[i] != a2[i]) {
             // Warning - two different object instances will never be equal: {x:20} != {x:20}
             return false;
         }
     }
     return true;
-}
-// Hide method from for-in loops
-Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+};
+
+SOLTOOLS.ArrayCompare = ArrayCompare;

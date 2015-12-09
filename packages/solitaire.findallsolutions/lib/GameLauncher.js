@@ -7,11 +7,7 @@ GameLauncher = function () {
 };
 
 GameLauncher.prototype.createGame = function (){
-    // get the factory
-    var plateauFactory = SOLCORE.PlateauFactory.getInstance();
-    // create new board
-    this.plateau = plateauFactory.createPlateau();
-
+    this.plateau = new SOLCORE.Plateau();
 };
 
 GameLauncher.prototype.getPlateau = function (){
