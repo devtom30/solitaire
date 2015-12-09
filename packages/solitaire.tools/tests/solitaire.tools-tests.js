@@ -94,14 +94,103 @@ Tinytest.add('solitaire.tools doQuarterTurn', function (test) {
         [x, x, o, o, o, x, x],
     ];
 
+    var possGridStep1_3 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+        [o, o, o, o, o, o, o],
+        [o, o, o, o, e, e, o],
+        [o, o, o, o, o, o, o],
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_4 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+        [o, o, o, o, o, o, o],
+        [o, o, o, o, o, o, o],
+        [o, o, o, e, o, o, o],
+        [x, x, o, e, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
     var possGridStep1_1_quarterTurned = Array;
+    var possGridStep1_2_quarterTurned = Array;
+    var possGridStep1_3_quarterTurned = Array;
+    var possGridStep1_4_quarterTurned = Array;
     try{
         possGridStep1_1_quarterTurned = CoordinatesManipulation.doQuarterTurn(possGridStep1_1);
+        possGridStep1_2_quarterTurned = CoordinatesManipulation.doQuarterTurn(possGridStep1_2);
+        possGridStep1_3_quarterTurned = CoordinatesManipulation.doQuarterTurn(possGridStep1_3);
+        possGridStep1_4_quarterTurned = CoordinatesManipulation.doQuarterTurn(possGridStep1_4);
     } catch (err) {
         console.log('Exception : ' + err);
     }
 
     test.isTrue(possGridStep1_1_quarterTurned.equals(possGridStep1_2));
+    test.isTrue(possGridStep1_2_quarterTurned.equals(possGridStep1_3));
+    test.isTrue(possGridStep1_3_quarterTurned.equals(possGridStep1_4));
+    test.isTrue(possGridStep1_4_quarterTurned.equals(possGridStep1_1));
+});
+
+Tinytest.add('solitaire.tools doQuarterTurn 2', function (test) {
+        var possGridStep1_1 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, e, x, x],
+        [o, o, o, o, o, o, o],
+        [o, e, e, o, o, o, o],
+        [o, o, o, o, o, o, o],
+        [x, x, o, e, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_2 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, e, o, x, x],
+        [o, o, o, e, o, o, o],
+        [o, e, o, o, o, o, o],
+        [o, o, o, o, o, e, o],
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_3 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, e, o, x, x],
+        [o, o, o, o, o, o, o],
+        [o, o, o, o, e, e, o],
+        [o, o, o, o, o, o, o],
+        [x, x, e, o, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_4 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+        [o, e, o, o, o, o, o],
+        [o, o, o, o, o, e, o],
+        [o, o, o, e, o, o, o],
+        [x, x, o, e, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_1_quarterTurned = Array;
+    var possGridStep1_2_quarterTurned = Array;
+    var possGridStep1_3_quarterTurned = Array;
+    var possGridStep1_4_quarterTurned = Array;
+    try{
+        possGridStep1_1_quarterTurned = CoordinatesManipulation.doQuarterTurn(possGridStep1_1);
+        possGridStep1_2_quarterTurned = CoordinatesManipulation.doQuarterTurn(possGridStep1_2);
+        possGridStep1_3_quarterTurned = CoordinatesManipulation.doQuarterTurn(possGridStep1_3);
+        possGridStep1_4_quarterTurned = CoordinatesManipulation.doQuarterTurn(possGridStep1_4);
+    } catch (err) {
+        console.log('Exception : ' + err);
+    }
+
+    test.isTrue(possGridStep1_1_quarterTurned.equals(possGridStep1_2));
+    test.isTrue(possGridStep1_2_quarterTurned.equals(possGridStep1_3));
+    test.isTrue(possGridStep1_3_quarterTurned.equals(possGridStep1_4));
+    test.isTrue(possGridStep1_4_quarterTurned.equals(possGridStep1_1));
 });
 
 Tinytest.add('solitaire.tools yet an other test', function (test) {
