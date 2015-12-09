@@ -61,6 +61,38 @@ CoordinatesManipulation.inverserY = function (tab) {
     return newTab;
 };
 
+/**
+ * Takes an array and do a quarter-turn (clockwise direction)
+ * X = Y
+ * Y = -X
+ * @param tab
+ * @return new tab
+ */
+CoordinatesManipulation.doQuarterTurn = function (tab) {
+    var tabTmp = tab;
+    var newTab = cloneArray(tab);
+
+    var xMax = tabTmp.length - 1;
+    var yMax = tabTmp[0].length - 1;
+
+    if (xMax != yMax) {
+        throw 'array must have same width and height';
+    }
+
+    var i = 0;
+    while (i <= xMax) {
+        var j = 0;
+        while (j <= yMax) {
+            newTab[j][xMax - i] = tabTmp[i][j];
+
+            j++;
+        }
+        i++;
+    }
+
+    return newTab;
+};
+
 cloneArray = function (tab) {
     var newTab = [];
 

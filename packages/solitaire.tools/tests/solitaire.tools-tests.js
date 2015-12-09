@@ -1,3 +1,7 @@
+var x = SOLCORE.Case.TypeEnum.FORBIDDEN;
+var o = SOLCORE.Case.TypeEnum.FULL;
+var e = SOLCORE.Case.TypeEnum.EMPTY;
+
 Tinytest.add('tools ArrayCompare', function (test) {
     var t1 = ['a', 'b', 'c'];
     var t2 = ['a', 'b', 'c'];
@@ -67,4 +71,81 @@ Tinytest.add('solitaire.tools inverserY', function (test) {
     test.equal(newGrille[4][0], '4-4');
     test.equal(newGrille[3][3], '3-1');
     test.equal(newGrille[0][4], '0-0');
+});
+
+Tinytest.add('solitaire.tools doQuarterTurn', function (test) {
+        var possGridStep1_1 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+        [o, o, o, o, o, o, o],
+        [o, e, e, o, o, o, o],
+        [o, o, o, o, o, o, o],
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_2 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, e, o, x, x],
+        [o, o, o, e, o, o, o],
+        [o, o, o, o, o, o, o],
+        [o, o, o, o, o, o, o],
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_1_quarterTurned = Array;
+    try{
+        possGridStep1_1_quarterTurned = CoordinatesManipulation.doQuarterTurn(possGridStep1_1);
+    } catch (err) {
+        console.log('Exception : ' + err);
+    }
+
+    test.isTrue(possGridStep1_1_quarterTurned.equals(possGridStep1_2));
+});
+
+Tinytest.add('solitaire.tools yet an other test', function (test) {
+
+    var possGridStep1_1 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+        [o, o, o, o, o, o, o],
+        [o, e, e, o, o, o, o],
+        [o, o, o, o, o, o, o],
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_2 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, e, o, x, x],
+        [o, o, o, e, o, o, o],
+        [o, o, o, o, o, o, o],
+        [o, o, o, o, o, o, o],
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_3 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+        [o, o, o, o, o, o, o],
+        [o, o, o, o, e, e, o],
+        [o, o, o, o, o, o, o],
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+    var possGridStep1_4 = [
+        [x, x, o, o, o, x, x],
+        [x, x, o, o, o, x, x],
+        [o, o, o, o, o, o, o],
+        [o, o, o, o, o, o, o],
+        [o, o, o, e, o, o, o],
+        [x, x, o, e, o, x, x],
+        [x, x, o, o, o, x, x],
+    ];
+
+
+
 });
